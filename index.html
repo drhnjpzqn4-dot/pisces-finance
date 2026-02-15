@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>♓ Pisces Finance 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --accent-gold: #fbbf24;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --accent-purple: #a855f7;
+            --accent-cyan: #06b6d4;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #1e293b;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .app { max-width: 1400px; margin: 0 auto; padding: 1rem; }
+        
+        .header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 0; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
+        }
+        
+        .logo { display: flex; align-items: center; gap: 0.75rem; }
+        .logo-icon { font-size: 2rem; }
+        .logo h1 {
+            font-size: 1.5rem; font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .logo span { font-size: 0.75rem; color: var(--text-muted); display: block; }
+        
+        .current-date { text-align: right; color: var(--text-secondary); font-size: 0.875rem; }
+        .current-date strong { display: block; font-size: 1rem; color: var(--text-primary); }
+        
+        .alert-banner {
+            padding: 1rem 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;
+            display: flex; align-items: center; gap: 1rem; animation: pulse 3s ease-in-out infinite;
+        }
+        .alert-banner.danger { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05)); border: 1px solid rgba(239,68,68,0.3); }
+        .alert-banner.warning { background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(251,191,36,0.05)); border: 1px solid rgba(251,191,36,0.3); }
+        .alert-banner.success { background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(34,197,94,0.05)); border: 1px solid rgba(34,197,94,0.3); }
+        
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.85; } }
+        
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .alert-content p { font-size: 0.875rem; color: var(--text-secondary); }
+        .alert-countdown { margin-left: auto; text-align: right; font-family: 'JetBrains Mono', monospace; }
+        .alert-countdown .days { font-size: 1.5rem; font-weight: 700; }
+        .alert-countdown .label { font-size: 0.75rem; color: var(--text-muted); }
+        
+        .main-grid { display: grid; grid-template-columns: 1fr 1fr 420px; gap: 1.5rem; }
+        @media (max-width: 1200px) { .main-grid { grid-template-columns: 1fr 1fr; } .chat-section { grid-column: span 2; } }
+        @media (max-width: 768px) { .main-grid { grid-template-columns: 1fr; } .chat-section { grid-column: span 1; } }
+        
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 1.25rem; transition: all 0.2s ease;
+        }
+        .card:hover { background: var(--bg-card-hover); }
+        
+        .card-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border);
+        }
+        .card-header h2 {
+            font-size: 0.875rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.05em; color: var(--text-secondary); display: flex; align-items: center; gap: 0.5rem;
+        }
+        .card-header .badge {
+            font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 999px;
+            background: var(--accent-purple); color: white;
+        }
+        
+        .portfolio-item {
+            display: grid; grid-template-columns: auto 1fr auto auto auto;
+            gap: 0.75rem; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+        }
+        .portfolio-item:last-child { border-bottom: none; }
+        
+        .stock-icon {
+            width: 32px; height: 32px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.65rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+        }
+        
+        .stock-info h4 { font-size: 0.85rem; font-weight: 600; }
+        .stock-info span { font-size: 0.7rem; color: var(--text-muted); }
+        .stock-shares { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); }
+        
+        .stock-alert { padding: 0.2rem 0.4rem; border-radius: 6px; font-size: 0.65rem; font-weight: 600; white-space: nowrap; }
+        .stock-alert.watch { background: rgba(251,191,36,0.2); color: var(--accent-gold); }
+        .stock-alert.hold { background: rgba(59,130,246,0.2); color: var(--accent-blue); }
+        .stock-alert.accumulate { background: rgba(34,197,94,0.2); color: var(--accent-green); }
+        .stock-alert.caution { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+        
+        .stock-link {
+            color: var(--text-muted); text-decoration: none; padding: 0.2rem;
+            border-radius: 4px; transition: all 0.2s; font-size: 0.9rem;
+        }
+        .stock-link:hover { color: var(--accent-cyan); background: rgba(6,182,212,0.1); }
+        
+        .sector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+        .sector-btn {
+            padding: 0.6rem 0.4rem; border-radius: 10px; border: 1px solid var(--border);
+            background: transparent; color: var(--text-primary); cursor: pointer;
+            transition: all 0.2s; text-align: center;
+        }
+        .sector-btn:hover { background: var(--bg-card-hover); border-color: var(--accent-cyan); }
+        .sector-btn .emoji { font-size: 1.1rem; display: block; margin-bottom: 0.2rem; }
+        .sector-btn .name { font-size: 0.7rem; font-weight: 500; }
+        .sector-btn .status { font-size: 0.6rem; margin-top: 0.2rem; }
+        .sector-btn .status.accumulate { color: var(--accent-green); }
+        .sector-btn .status.hold { color: var(--accent-blue); }
+        .sector-btn .status.wait { color: var(--accent-gold); }
+        
+        .timeline-item { display: flex; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
+        .timeline-item:last-child { border-bottom: none; }
+        .timeline-date { min-width: 55px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted); }
+        .timeline-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+        .timeline-dot.danger { background: var(--accent-red); box-shadow: 0 0 8px rgba(239,68,68,0.3); }
+        .timeline-dot.warning { background: var(--accent-gold); }
+        .timeline-dot.success { background: var(--accent-green); box-shadow: 0 0 8px rgba(34,197,94,0.3); }
+        .timeline-dot.info { background: var(--accent-blue); }
+        .timeline-dot.best { background: linear-gradient(135deg, var(--accent-gold), var(--accent-green)); box-shadow: 0 0 12px rgba(251,191,36,0.5); }
+        .timeline-content h4 { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.15rem; }
+        .timeline-content p { font-size: 0.7rem; color: var(--text-muted); }
+        .timeline-tickers { display: flex; flex-wrap: wrap; gap: 0.2rem; margin-top: 0.3rem; }
+        .ticker-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; padding: 0.1rem 0.3rem; border-radius: 4px; background: rgba(168,85,247,0.2); color: var(--accent-purple); }
+        
+        .analyst-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+        .analyst-item:last-child { border-bottom: none; }
+        .analyst-info { display: flex; align-items: center; gap: 0.6rem; }
+        .analyst-rank { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-gold), #f59e0b); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 700; }
+        .analyst-name { font-size: 0.8rem; font-weight: 500; }
+        .analyst-firm { font-size: 0.65rem; color: var(--text-muted); }
+        .analyst-stats { text-align: right; }
+        .analyst-success { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent-green); }
+        .analyst-return { font-size: 0.65rem; color: var(--text-muted); }
+        
+        .golden-rules { display: grid; gap: 0.4rem; }
+        .rule { display: flex; gap: 0.6rem; padding: 0.4rem; border-radius: 8px; background: rgba(251,191,36,0.05); border: 1px solid rgba(251,191,36,0.1); }
+        .rule-number { width: 18px; height: 18px; border-radius: 50%; background: var(--accent-gold); color: var(--bg-dark); font-size: 0.65rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .rule-text { font-size: 0.7rem; color: var(--text-secondary); }
+        
+        .chat-section { display: flex; flex-direction: column; height: 650px; }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 0.5rem 0; display: flex; flex-direction: column; gap: 0.6rem; }
+        .message { padding: 0.6rem 0.8rem; border-radius: 10px; max-width: 92%; font-size: 0.8rem; line-height: 1.5; }
+        .message.user { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); align-self: flex-end; border-bottom-right-radius: 4px; }
+        .message.assistant { background: var(--bg-card-hover); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .message.system { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); align-self: center; text-align: center; font-size: 0.75rem; color: var(--accent-gold); }
+        
+        .quick-questions { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); margin-bottom: 0.4rem; }
+        .quick-q { font-size: 0.65rem; padding: 0.3rem 0.5rem; border-radius: 999px; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
+        .quick-q:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+        
+        .chat-input-container { display: flex; gap: 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+        .chat-input { flex: 1; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.8rem; color: var(--text-primary); font-family: inherit; font-size: 0.8rem; resize: none; }
+        .chat-input:focus { outline: none; border-color: var(--accent-cyan); }
+        .chat-send { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue)); border: none; border-radius: 10px; padding: 0 1rem; color: white; font-weight: 600; cursor: pointer; transition: all 0.2s; font-size: 0.8rem; }
+        .chat-send:hover { transform: scale(1.05); }
+        .chat-send:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
+        .modal-overlay.hidden { display: none; }
+        .modal { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; max-width: 420px; width: 100%; }
+        .modal h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .modal p { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+        .modal input { width: 100%; padding: 0.75rem 1rem; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-dark); color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-bottom: 1rem; }
+        .modal input:focus { outline: none; border-color: var(--accent-cyan); }
+        .modal-btn { width: 100%; padding: 0.75rem; border-radius: 10px; border: none; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue)); color: white; font-weight: 600; cursor: pointer; }
+        .modal-note { font-size: 0.7rem; color: var(--text-muted); margin-top: 1rem; text-align: center; }
+        .modal-note a { color: var(--accent-cyan); }
+        
+        .loading { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--text-muted); border-top-color: var(--accent-cyan); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">♓</span>
+                <div>
+                    <h1>Pisces Finance 2026</h1>
+                    <span>Din personliga börsassistent</span>
+                </div>
+            </div>
+            <div class="current-date">
+                <strong id="currentDate"></strong>
+                <span id="currentPhase"></span>
+            </div>
+        </header>
+        
+        <div class="alert-banner" id="alertBanner">
+            <span class="alert-icon" id="alertIcon">⚠️</span>
+            <div class="alert-content">
+                <h3 id="alertTitle">Laddar...</h3>
+                <p id="alertDescription"></p>
+            </div>
+            <div class="alert-countdown">
+                <span class="days" id="countdownDays">-</span>
+                <span class="label">dagar kvar</span>
+            </div>
+        </div>
+        
+        <div class="main-grid">
+            <div class="column">
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="card-header">
+                        <h2>💼 Min Portfölj</h2>
+                        <span class="badge">Avanza</span>
+                    </div>
+                    <div id="portfolioList"></div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header"><h2>🎯 Sektorer</h2></div>
+                    <div class="sector-grid">
+                        <button class="sector-btn" onclick="askAboutSector('guld')">
+                            <span class="emoji">🥇</span><span class="name">Guld</span>
+                            <span class="status accumulate">Ackumulera</span>
+                        </button>
+                        <button class="sector-btn" onclick="askAboutSector('vatten ETFs')">
+                            <span class="emoji">💧</span><span class="name">Vatten</span>
+                            <span class="status accumulate">Entry 20/2</span>
+                        </button>
+                        <button class="sector-btn" onclick="askAboutSector('crypto och Bitcoin')">
+                            <span class="emoji">₿</span><span class="name">Krypto</span>
+                            <span class="status wait">Vänta</span>
+                        </button>
+                        <button class="sector-btn" onclick="askAboutSector('AI och chipaktier')">
+                            <span class="emoji">🤖</span><span class="name">AI/Chips</span>
+                            <span class="status hold">Selektiv</span>
+                        </button>
+                        <button class="sector-btn" onclick="askAboutSector('solenergi')">
+                            <span class="emoji">☀️</span><span class="name">Solar</span>
+                            <span class="status accumulate">DCA</span>
+                        </button>
+                        <button class="sector-btn" onclick="askAboutSector('försvar och SAAB')">
+                            <span class="emoji">🛡️</span><span class="name">Försvar</span>
+                            <span class="status accumulate">SAAB ✓</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="card-header"><h2>📅 Kommande</h2></div>
+                    <div id="timeline"></div>
+                </div>
+                
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="card-header">
+                        <h2>🏆 Top Analytiker</h2>
+                        <span class="badge">TipRanks</span>
+                    </div>
+                    <div id="analystList"></div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header"><h2>⭐ Golden Rules</h2></div>
+                    <div class="golden-rules">
+                        <div class="rule"><span class="rule-number">1</span><span class="rule-text">UNDVIK ALLA ECLIPSER - vänta 3-5 dagar</span></div>
+                        <div class="rule"><span class="rule-number">2</span><span class="rule-text">JUL 2-5 = RED ALERT - seismisk volatilitet</span></div>
+                        <div class="rule"><span class="rule-number">3</span><span class="rule-text">JUN 9 = BÄSTA DAGEN för luxury/kreativt</span></div>
+                        <div class="rule"><span class="rule-number">4</span><span class="rule-text">DEC 15-17 = ÅRETS BÄSTA WINDOW</span></div>
+                        <div class="rule"><span class="rule-number">5</span><span class="rule-text">DCA: PHO, GLD, ENPH, CCJ, CRWD</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card chat-section">
+                <div class="card-header">
+                    <h2>💬 Fråga Claude</h2>
+                    <span class="badge">All kontext</span>
+                </div>
+                
+                <div class="quick-questions">
+                    <button class="quick-q" onclick="askQuick('Hur ser veckan ut för min portfölj?')">📊 Veckans läge</button>
+                    <button class="quick-q" onclick="askQuick('Vilka av mina aktier bör jag vara orolig för just nu?')">⚠️ Varningar</button>
+                    <button class="quick-q" onclick="askQuick('Ge mig en analys av Xspray Pharma med tanke på pharma-varningen')">💊 Xspray</button>
+                    <button class="quick-q" onclick="askQuick('Hur påverkas TSMC av AI-trenden?')">🔬 TSMC</button>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message system">Jag har all information om din portfölj och Pisces 2026. Fråga mig!</div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <textarea class="chat-input" id="chatInput" placeholder="Skriv din fråga..." rows="2"></textarea>
+                    <button class="chat-send" id="chatSend" onclick="sendMessage()">Skicka</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="apiModal">
+        <div class="modal">
+            <h3>🔑 Anslut till Claude</h3>
+            <p>För att chatta behöver du en Anthropic API-nyckel. Den sparas endast lokalt i din webbläsare.</p>
+            <input type="password" id="apiKeyInput" placeholder="sk-ant-api03-...">
+            <button class="modal-btn" onclick="saveApiKey()">Spara & Starta</button>
+            <p class="modal-note">Hämta din nyckel från <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></p>
+        </div>
+    </div>
+
+    <script>
+        const portfolio = [
+            { ticker: 'JOBY', name: 'Joby Aviation', shares: 40, market: 'NYSE', alert: 'watch', tip: 'Flygsektor volatil Apr 22-25' },
+            { ticker: 'MDT', name: 'Medtronic', shares: 30, market: 'NYSE', alert: 'hold', tip: 'Healthcare stabil' },
+            { ticker: 'SAAB-B', name: 'SAAB B', shares: 348, market: 'STO', alert: 'accumulate', tip: 'Försvar gynnas av Saturn i Aries' },
+            { ticker: 'TSM', name: 'TSMC', shares: 18, market: 'NYSE', alert: 'accumulate', tip: 'BofA top pick, +43% 6mån' },
+            { ticker: 'XSPRAY', name: 'Xspray Pharma', shares: 1000, market: 'STO', alert: 'caution', tip: 'Pharma under tryck Feb-Mar' },
+            { ticker: 'TELIA', name: 'Telia', shares: 20, market: 'STO', alert: 'hold', tip: 'Uranus Gemini gynnar telecom' },
+            { ticker: 'ALV', name: 'Autoliv', shares: 20, market: 'NYSE', alert: 'hold', tip: 'Automotive volatilitet' }
+        ];
+        
+        const events = [
+            { date: '17 feb', type: 'danger', title: 'SOLAR ECLIPSE', desc: 'Ingen ny entry', tickers: [] },
+            { date: '20 feb', type: 'warning', title: 'Saturn-Neptune', desc: 'Entry-window efter', tickers: ['PHO','CGW','FIW'] },
+            { date: '25 feb', type: 'info', title: 'Mercury Retro', desc: 'Review only', tickers: [] },
+            { date: '3 mar', type: 'danger', title: 'Lunar Eclipse', desc: 'Undvik pharma', tickers: ['XSPRAY?'] },
+            { date: '10-17 mar', type: 'success', title: 'Jupiter Direkt', desc: 'Healing tech', tickers: ['CALM','NESN'] },
+            { date: '9 jun', type: 'best', title: '⭐ BÄSTA DAGEN', desc: 'Venus-Jupiter', tickers: ['Luxury'] },
+            { date: '2-5 jul', type: 'danger', title: '🚨 RED ALERT', desc: 'Max volatilitet', tickers: [] },
+            { date: '15-17 dec', type: 'best', title: '⭐ BÄSTA WINDOW', desc: 'Grand Fire Trine', tickers: ['All'] }
+        ];
+        
+        const analysts = [
+            { name: 'Sam Slutsky', firm: 'LifeSci Capital', success: '67.7%', ret: '+62.4% avg' },
+            { name: 'Chris Kotowski', firm: 'Oppenheimer', success: '85.0%', ret: '+42.8% avg' },
+            { name: 'Vivek Arya', firm: 'Bank of America', success: '78.5%', ret: 'Chips expert' },
+            { name: 'Tom Lee', firm: 'Fundstrat', success: '76.2%', ret: 'Energi 2026' }
+        ];
+        
+        const systemPrompt = `Du är en expert finansrådgivare som hjälper användaren baserat på Pisces Rising Financial Astrology Forecast 2026.
+
+ANVÄNDARENS PORTFÖLJ (Avanza):
+- 40 st Joby Aviation (JOBY) - flygsektor, volatil Apr 22-25
+- 30 st Medtronic (MDT) - healthcare, stabil
+- 348 st SAAB B - försvar, MYCKET POSITIVT (Saturn i Aries gynnar försvar)
+- 18 st TSMC - chips/AI, BofA top pick, ACKUMULERA
+- 1000 st Xspray Pharma - VARNING: Pharma under tryck Feb-Mar
+- 20 st Telia - telecom, stabil
+- 20 st Autoliv (ALV) - automotive
+
+VALIDERAD PROGNOS (91% träffsäkerhet):
+✅ Crypto-kollaps: BTC $91k→$68k exakt som varnat
+✅ Guld-rally: +74% YoY
+✅ Jan 6-15 FOMO crash - träff
+✅ Feb 12 AI fears - Nasdaq -2%
+
+NUVARANDE FAS (Feb 2026):
+🔴 17 feb: Solar Eclipse - INGEN ENTRY
+🔴 20 feb: Saturn-Neptune - strukturell reset
+🟢 Efter 20 feb: Entry vatten ETFs (PHO, CGW, FIW)
+🟡 25 feb: Mercury Retrograde - review only
+
+DANGER ZONES:
+- Feb 17, Mar 3, Aug 12, Aug 28: Eclipser
+- Apr 22-25: Uranus shock (JOBY risk!)
+- Jul 2-5: RED ALERT
+
+BÄSTA DAGAR:
+- Jun 9: Venus-Jupiter
+- Jul 20-21: Wealth Triangle  
+- Dec 15-17: Grand Fire Trine
+
+SEKTORER Q1:
+- ACKUMULERA: Vatten (PHO, CGW), Guld (GLD), Solar (ENPH), Försvar (SAAB ✓)
+- VÄNTA: Crypto (efter 20 feb)
+- SELEKTIV: AI/Chips (TSM, AVGO på dips)
+- VARNING: Pharma (Xspray!)
+
+TOP ANALYTIKER:
+- Sam Slutsky (LifeSci): 67.7% success
+- Chris Kotowski (Oppenheimer): 85% success
+- Vivek Arya (BofA): Chips expert - NVDA, AVGO, TSM
+
+Svara på svenska. Var konkret med rekommendationer.`;
+
+        let apiKey = localStorage.getItem('anthropic_api_key');
+        let chatHistory = [];
+        
+        function init() {
+            const now = new Date();
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('sv-SE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            
+            const eclipseDate = new Date('2026-02-17');
+            const daysToEclipse = Math.ceil((eclipseDate - now) / (1000*60*60*24));
+            
+            const banner = document.getElementById('alertBanner');
+            if (daysToEclipse > 0 && daysToEclipse <= 10) {
+                banner.className = 'alert-banner danger';
+                document.getElementById('alertIcon').textContent = '🔴';
+                document.getElementById('alertTitle').textContent = 'SOLAR ECLIPSE 17 FEBRUARI';
+                document.getElementById('alertDescription').textContent = 'Ingen ny entry. Xspray under observation.';
+                document.getElementById('countdownDays').textContent = daysToEclipse;
+                document.getElementById('currentPhase').textContent = '⚠️ Pre-Eclipse';
+            } else {
+                banner.className = 'alert-banner success';
+                document.getElementById('alertIcon').textContent = '🟢';
+                document.getElementById('alertTitle').textContent = 'Entry Window';
+                document.getElementById('alertDescription').textContent = 'Post Saturn-Neptune. Gynnsamt för vatten ETFs.';
+                document.getElementById('countdownDays').textContent = '-';
+                document.getElementById('currentPhase').textContent = '🟢 Entry Window';
+            }
+            
+            document.getElementById('portfolioList').innerHTML = portfolio.map(s => `
+                <div class="portfolio-item">
+                    <div class="stock-icon">${s.ticker.substring(0,2)}</div>
+                    <div class="stock-info"><h4>${s.ticker}</h4><span>${s.name}</span></div>
+                    <div class="stock-shares">${s.shares} st</div>
+                    <span class="stock-alert ${s.alert}" title="${s.tip}">${s.alert === 'accumulate' ? '🟢' : s.alert === 'caution' ? '⚠️' : s.alert === 'watch' ? '👁️' : '✋'}</span>
+                    <a href="https://finance.yahoo.com/quote/${s.market === 'STO' ? s.ticker + '.ST' : s.ticker}" target="_blank" class="stock-link">📈</a>
+                </div>
+            `).join('');
+            
+            document.getElementById('timeline').innerHTML = events.map(e => `
+                <div class="timeline-item">
+                    <div class="timeline-date">${e.date}</div>
+                    <div class="timeline-dot ${e.type}"></div>
+                    <div class="timeline-content">
+                        <h4>${e.title}</h4>
+                        <p>${e.desc}</p>
+                        ${e.tickers.length ? `<div class="timeline-tickers">${e.tickers.map(t => `<span class="ticker-tag">${t}</span>`).join('')}</div>` : ''}
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('analystList').innerHTML = analysts.map((a,i) => `
+                <div class="analyst-item">
+                    <div class="analyst-info">
+                        <span class="analyst-rank">${i+1}</span>
+                        <div><div class="analyst-name">${a.name}</div><div class="analyst-firm">${a.firm}</div></div>
+                    </div>
+                    <div class="analyst-stats"><div class="analyst-success">${a.success}</div><div class="analyst-return">${a.ret}</div></div>
+                </div>
+            `).join('');
+            
+            if (!apiKey) document.getElementById('apiModal').classList.remove('hidden');
+            else document.getElementById('apiModal').classList.add('hidden');
+            
+            document.getElementById('chatInput').addEventListener('keydown', e => {
+                if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+            });
+        }
+        
+        function saveApiKey() {
+            const key = document.getElementById('apiKeyInput').value.trim();
+            if (key && key.startsWith('sk-ant-')) {
+                apiKey = key;
+                localStorage.setItem('anthropic_api_key', key);
+                document.getElementById('apiModal').classList.add('hidden');
+                addMessage('system', '✅ Ansluten! Fråga mig om din portfölj eller marknaden.');
+            } else { alert('Ogiltig API-nyckel'); }
+        }
+        
+        function addMessage(type, content) {
+            const msgs = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = `message ${type}`;
+            div.innerHTML = content.replace(/\n/g, '<br>');
+            msgs.appendChild(div);
+            msgs.scrollTop = msgs.scrollHeight;
+        }
+        
+        function askQuick(q) { document.getElementById('chatInput').value = q; sendMessage(); }
+        function askAboutSector(s) { document.getElementById('chatInput').value = `Ge mig en analys av ${s}-sektorn. Vilka aktier/ETFs bör jag fokusera på?`; sendMessage(); }
+        
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const btn = document.getElementById('chatSend');
+            const msg = input.value.trim();
+            if (!msg) return;
+            if (!apiKey) { document.getElementById('apiModal').classList.remove('hidden'); return; }
+            
+            addMessage('user', msg);
+            input.value = '';
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span>';
+            
+            chatHistory.push({ role: 'user', content: msg });
+            
+            try {
+                const res = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+                    body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1024, system: systemPrompt, messages: chatHistory })
+                });
+                const data = await res.json();
+                if (data.error) throw new Error(data.error.message);
+                const reply = data.content[0].text;
+                chatHistory.push({ role: 'assistant', content: reply });
+                addMessage('assistant', reply);
+            } catch (err) {
+                addMessage('system', `❌ ${err.message}`);
+                chatHistory.pop();
+            }
+            btn.disabled = false;
+            btn.textContent = 'Skicka';
+        }
+        
+        init();
+    </script>
+</body>
+</html>
