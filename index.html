@@ -9,25 +9,25 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Pisces Finance">
-    <meta name="theme-color" content="#f8fafc">
+    <meta name="theme-color" content="#0a0a0f">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #f8fafc;
-            --bg-card: #ffffff;
-            --bg-card-hover: #f1f5f9;
-            --accent-gold: #d97706;
-            --accent-green: #16a34a;
-            --accent-red: #dc2626;
-            --accent-blue: #2563eb;
-            --accent-purple: #7c3aed;
-            --accent-cyan: #0891b2;
-            --accent-orange: #ea580c;
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --accent-gold: #fbbf24;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --accent-purple: #a855f7;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #f97316;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
             --text-muted: #64748b;
-            --border: #e2e8f0;
+            --border: #1e293b;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -67,21 +67,21 @@
             display: flex; align-items: center; gap: 1rem;
         }
         .alert-banner.danger {
-            background: linear-gradient(135deg, rgba(220,38,38,0.12), rgba(220,38,38,0.04));
-            border: 1px solid rgba(220,38,38,0.3);
+            background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05));
+            border: 1px solid rgba(239,68,68,0.4);
             animation: pulse-danger 2s ease-in-out infinite;
         }
         .alert-banner.warning {
-            background: linear-gradient(135deg, rgba(217,119,6,0.12), rgba(217,119,6,0.04));
-            border: 1px solid rgba(217,119,6,0.3);
+            background: linear-gradient(135deg, rgba(251,191,36,0.12), rgba(251,191,36,0.03));
+            border: 1px solid rgba(251,191,36,0.3);
         }
         .alert-banner.success {
-            background: linear-gradient(135deg, rgba(22,163,74,0.12), rgba(22,163,74,0.04));
-            border: 1px solid rgba(22,163,74,0.3);
+            background: linear-gradient(135deg, rgba(34,197,94,0.12), rgba(34,197,94,0.03));
+            border: 1px solid rgba(34,197,94,0.3);
         }
         .alert-banner.info {
-            background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(37,99,235,0.04));
-            border: 1px solid rgba(37,99,235,0.3);
+            background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(59,130,246,0.03));
+            border: 1px solid rgba(59,130,246,0.3);
         }
         
         @keyframes pulse-danger { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
@@ -112,7 +112,6 @@
         .card {
             background: var(--bg-card); border: 1px solid var(--border);
             border-radius: 14px; padding: 1rem; margin-bottom: 1rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         .card:last-child { margin-bottom: 0; }
         
@@ -177,8 +176,7 @@
         .stock-remove:hover { color: var(--accent-red); }
         
         /* Sector Cards */
-        .sector-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
-        @media (min-width: 600px) { .sector-grid { grid-template-columns: repeat(4, 1fr); } }
+        .sector-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
         @media (max-width: 500px) { .sector-grid { grid-template-columns: 1fr; } }
         
         .sector-card {
@@ -238,9 +236,9 @@
         .chat-section { display: flex; flex-direction: column; height: 700px; }
         .chat-messages { flex: 1; overflow-y: auto; padding: 0.4rem 0; display: flex; flex-direction: column; gap: 0.5rem; }
         .message { padding: 0.5rem 0.7rem; border-radius: 10px; max-width: 95%; font-size: 0.75rem; line-height: 1.5; }
-        .message.user { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); align-self: flex-end; border-bottom-right-radius: 4px; color: white; }
+        .message.user { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); align-self: flex-end; border-bottom-right-radius: 4px; }
         .message.assistant { background: var(--bg-card-hover); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
-        .message.system { background: rgba(217,119,6,0.1); border: 1px solid rgba(217,119,6,0.3); align-self: center; text-align: center; font-size: 0.7rem; color: var(--accent-gold); }
+        .message.system { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); align-self: center; text-align: center; font-size: 0.7rem; color: var(--accent-gold); }
         
         .quick-questions { display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border); margin-bottom: 0.4rem; }
         .quick-q { font-size: 0.6rem; padding: 0.25rem 0.45rem; border-radius: 999px; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
@@ -282,9 +280,8 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         
         ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--bg-card); }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
         
         .empty-state { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.75rem; }
     </style>
@@ -401,23 +398,10 @@
     <div class="modal-overlay hidden" id="watchlistModal">
         <div class="modal">
             <h3>👁️ Lägg till i Bevakningslista</h3>
-            <p>Välj från rekommendationer eller lägg till egen:</p>
-            
-            <!-- Custom input section -->
-            <div style="background: var(--bg-card-hover); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem; margin-bottom: 1rem;">
-                <div style="font-size: 0.7rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-secondary);">➕ LÄGG TILL EGEN AKTIE</div>
-                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 0.5rem; margin-bottom: 0.5rem;">
-                    <input type="text" id="customTicker" placeholder="Ticker (ex: PLTR)" style="padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-dark); color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">
-                    <input type="text" id="customName" placeholder="Namn (ex: Palantir)" style="padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-dark); color: var(--text-primary); font-size: 0.75rem;">
-                </div>
-                <input type="text" id="customDesc" placeholder="Beskrivning (ex: AI-plattform för dataanalys)" style="width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-dark); color: var(--text-primary); font-size: 0.75rem; margin-bottom: 0.5rem;">
-                <button onclick="addCustomStock()" style="width: 100%; padding: 0.5rem; border-radius: 6px; border: none; background: var(--accent-cyan); color: white; font-weight: 600; cursor: pointer; font-size: 0.75rem;">Lägg till</button>
-            </div>
-            
-            <div style="font-size: 0.7rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-secondary);">📋 REKOMMENDERADE</div>
-            <input type="text" id="watchlistSearch" class="modal-search" placeholder="Sök ticker eller namn..." oninput="filterWatchlistOptions()" style="margin-bottom: 0.5rem;">
+            <p>Sök efter aktie eller välj från rekommendationer:</p>
+            <input type="text" id="watchlistSearch" class="modal-search" placeholder="Sök ticker eller namn..." oninput="filterWatchlistOptions()">
             <div class="modal-results" id="watchlistResults"></div>
-            <button class="modal-btn" onclick="closeWatchlistModal()" style="background: var(--border); margin-top: 0.5rem;">Stäng</button>
+            <button class="modal-btn" onclick="closeWatchlistModal()" style="background: var(--border);">Stäng</button>
         </div>
     </div>
 
@@ -451,11 +435,11 @@
                 ]
             },
             {
-                name: 'Big Tech', emoji: '🏛️', status: 'hold', statusText: 'Safe Haven',
+                name: 'Krypto', emoji: '₿', status: 'wait', statusText: 'Vänta →20/2',
                 picks: [
-                    { ticker: 'MSFT', name: 'Microsoft', action: 'buy', source: 'Wedbush' },
-                    { ticker: 'AAPL', name: 'Apple', action: 'hold', source: 'Safe Haven' },
-                    { ticker: 'GOOGL', name: 'Alphabet', action: 'hold', source: 'Safe Haven' }
+                    { ticker: 'BTC', name: 'Bitcoin', action: 'wait', source: 'Pisces' },
+                    { ticker: 'XRP', name: 'Ripple', action: 'buy', source: 'Pisces', note: 'Efter 20 feb' },
+                    { ticker: 'ETH', name: 'Ethereum', action: 'wait', source: 'Pisces' }
                 ]
             },
             {
@@ -463,7 +447,7 @@
                 picks: [
                     { ticker: 'TSM', name: 'TSMC', action: 'buy', source: 'BofA' },
                     { ticker: 'AVGO', name: 'Broadcom', action: 'buy', source: 'BofA' },
-                    { ticker: 'PLTR', name: 'Palantir', action: 'buy', source: 'Wedbush' }
+                    { ticker: 'NVDA', name: 'Nvidia', action: 'hold', source: 'Pisces', note: 'Volatil' }
                 ]
             },
             {
@@ -481,56 +465,34 @@
                     { ticker: 'LMT', name: 'Lockheed', action: 'buy', source: 'Pisces' },
                     { ticker: 'RTX', name: 'Raytheon', action: 'buy', source: 'Pisces' }
                 ]
-            },
-            {
-                name: 'Krypto', emoji: '₿', status: 'wait', statusText: 'Vänta →20/2',
-                picks: [
-                    { ticker: 'BTC', name: 'Bitcoin', action: 'wait', source: 'Pisces' },
-                    { ticker: 'XRP', name: 'Ripple', action: 'buy', source: 'Pisces', note: 'Efter 20 feb' },
-                    { ticker: 'ETH', name: 'Ethereum', action: 'wait', source: 'Pisces' }
-                ]
-            },
-            {
-                name: 'Mega Caps', emoji: '🦣', status: 'hold', statusText: 'Flykt-till-säkerhet',
-                picks: [
-                    { ticker: 'META', name: 'Meta', action: 'hold', source: 'Safe Haven' },
-                    { ticker: 'AMZN', name: 'Amazon', action: 'hold', source: 'Safe Haven' },
-                    { ticker: 'NVDA', name: 'Nvidia', action: 'hold', source: 'BofA' }
-                ]
             }
         ];
         
         const recommendedStocks = [
             // From Pisces forecast
-            { ticker: 'PHO', name: 'Invesco Water ETF', desc: 'ETF: Vatteninfrastruktur & reningsteknologi', source: 'Pisces', action: 'buy' },
-            { ticker: 'CGW', name: 'Invesco Global Water', desc: 'ETF: Global vattenindustri', source: 'Pisces', action: 'buy' },
-            { ticker: 'FIW', name: 'First Trust Water', desc: 'ETF: Amerikanska vattenbolag', source: 'Pisces', action: 'buy' },
-            { ticker: 'XYL', name: 'Xylem Inc', desc: 'Vattenpumpar & behandlingslösningar', source: 'Pisces', action: 'buy' },
-            { ticker: 'GLD', name: 'SPDR Gold Shares', desc: 'ETF: Fysiskt guld, safe haven', source: 'Pisces', action: 'buy' },
-            { ticker: 'GDX', name: 'Gold Miners ETF', desc: 'ETF: Guldgruvbolag', source: 'Pisces', action: 'buy' },
-            { ticker: 'ENPH', name: 'Enphase Energy', desc: 'Mikroinverters för solenergi', source: 'Pisces', action: 'buy' },
-            { ticker: 'FSLR', name: 'First Solar', desc: 'Solpaneler & solkraftverk', source: 'Pisces', action: 'buy' },
-            { ticker: 'CCJ', name: 'Cameco', desc: 'Uranproducent, kärnkraft', source: 'Pisces', action: 'buy' },
-            { ticker: 'CRWD', name: 'CrowdStrike', desc: 'Cybersäkerhet, endpoint protection', source: 'Pisces', action: 'buy' },
-            { ticker: 'LMT', name: 'Lockheed Martin', desc: 'Försvar: stridsflygplan, missiler', source: 'Pisces', action: 'buy' },
-            { ticker: 'RTX', name: 'Raytheon', desc: 'Försvar: missiler, radar, cybersäkerhet', source: 'Pisces', action: 'buy' },
-            // Big Tech - Safe Haven
-            { ticker: 'AAPL', name: 'Apple', desc: 'iPhone, Mac, tjänster. Stark kassa.', source: 'Safe Haven', action: 'hold', target: '+10%' },
-            { ticker: 'MSFT', name: 'Microsoft', desc: 'Cloud (Azure), Office, AI (OpenAI)', source: 'Wedbush', action: 'buy', target: '+28%' },
-            { ticker: 'GOOGL', name: 'Alphabet (Google)', desc: 'Sök, YouTube, Cloud, Waymo', source: 'Safe Haven', action: 'hold' },
-            { ticker: 'META', name: 'Meta (Facebook)', desc: 'Facebook, Instagram, WhatsApp, VR', source: 'Safe Haven', action: 'hold' },
-            { ticker: 'AMZN', name: 'Amazon', desc: 'E-handel, AWS cloud, logistik', source: 'Safe Haven', action: 'hold' },
+            { ticker: 'PHO', name: 'Invesco Water ETF', source: 'Pisces', action: 'buy' },
+            { ticker: 'CGW', name: 'Invesco Global Water', source: 'Pisces', action: 'buy' },
+            { ticker: 'FIW', name: 'First Trust Water', source: 'Pisces', action: 'buy' },
+            { ticker: 'XYL', name: 'Xylem Inc', source: 'Pisces', action: 'buy' },
+            { ticker: 'GLD', name: 'SPDR Gold Shares', source: 'Pisces', action: 'buy' },
+            { ticker: 'GDX', name: 'Gold Miners ETF', source: 'Pisces', action: 'buy' },
+            { ticker: 'ENPH', name: 'Enphase Energy', source: 'Pisces', action: 'buy' },
+            { ticker: 'FSLR', name: 'First Solar', source: 'Pisces', action: 'buy' },
+            { ticker: 'CCJ', name: 'Cameco (Uranium)', source: 'Pisces', action: 'buy' },
+            { ticker: 'CRWD', name: 'CrowdStrike', source: 'Pisces', action: 'buy' },
+            { ticker: 'LMT', name: 'Lockheed Martin', source: 'Pisces', action: 'buy' },
+            { ticker: 'RTX', name: 'Raytheon', source: 'Pisces', action: 'buy' },
             // From top analysts
-            { ticker: 'TSM', name: 'TSMC', desc: 'Världens största chipstillverkare', source: 'BofA Arya', action: 'buy', target: '+15%' },
-            { ticker: 'AVGO', name: 'Broadcom', desc: 'Chips för datacenter, nätverk, AI', source: 'BofA Arya', action: 'buy', target: '+20%' },
-            { ticker: 'NVDA', name: 'Nvidia', desc: 'GPU:er för AI & gaming', source: 'BofA Arya', action: 'hold' },
-            { ticker: 'LRCX', name: 'Lam Research', desc: 'Utrustning för chiptillverkning', source: 'BofA Arya', action: 'buy' },
-            { ticker: 'KLAC', name: 'KLA Corp', desc: 'Kvalitetskontroll för chips', source: 'BofA Arya', action: 'buy' },
-            { ticker: 'HLNE', name: 'Hamilton Lane', desc: 'Private equity & alternativa investeringar', source: 'Kotowski', action: 'buy' },
-            { ticker: 'XLE', name: 'Energy Select', desc: 'ETF: Amerikanska energibolag', source: 'Tom Lee', action: 'buy' },
-            { ticker: 'PLTR', name: 'Palantir', desc: 'AI-plattform för dataanalys, försvar', source: 'Wedbush', action: 'buy' },
+            { ticker: 'TSM', name: 'TSMC', source: 'BofA Arya', action: 'buy', target: '+15%' },
+            { ticker: 'AVGO', name: 'Broadcom', source: 'BofA Arya', action: 'buy', target: '+20%' },
+            { ticker: 'NVDA', name: 'Nvidia', source: 'BofA Arya', action: 'hold' },
+            { ticker: 'LRCX', name: 'Lam Research', source: 'BofA Arya', action: 'buy' },
+            { ticker: 'KLAC', name: 'KLA Corp', source: 'BofA Arya', action: 'buy' },
+            { ticker: 'MSFT', name: 'Microsoft', source: 'Wedbush', action: 'buy', target: '+28%' },
+            { ticker: 'HLNE', name: 'Hamilton Lane', source: 'Kotowski', action: 'buy' },
+            { ticker: 'XLE', name: 'Energy Select', source: 'Tom Lee', action: 'buy' },
             // Swedish
-            { ticker: 'SAAB-B.ST', name: 'SAAB B', desc: 'Svenskt försvar: Gripen, radar, ubåtar', source: 'Pisces', action: 'buy' },
+            { ticker: 'SAAB-B.ST', name: 'SAAB B', source: 'Pisces', action: 'buy' },
         ];
         
         const events = [
@@ -685,8 +647,7 @@
                     <div class="stock-icon watchlist">${s.ticker.substring(0,2)}</div>
                     <div class="stock-info">
                         <h4>${s.ticker}</h4>
-                        <span>${s.name}</span>
-                        <div style="font-size: 0.6rem; color: var(--text-muted); margin-top: 2px;">${s.desc || s.source}</div>
+                        <span>${s.name} • ${s.source}</span>
                     </div>
                     <div class="stock-price">
                         ${s.target ? `<div class="target">${s.target}</div>` : ''}
@@ -761,12 +722,11 @@
                 (s.ticker.toLowerCase().includes(filter.toLowerCase()) || s.name.toLowerCase().includes(filter.toLowerCase()))
             );
             
-            results.innerHTML = filtered.slice(0, 8).map(s => `
-                <div class="modal-result" onclick="addToWatchlist('${s.ticker}', '${s.name}', '${s.source}', '${s.action}', '${s.target || ''}', '${s.desc || ''}')">
+            results.innerHTML = filtered.slice(0, 10).map(s => `
+                <div class="modal-result" onclick="addToWatchlist('${s.ticker}', '${s.name}', '${s.source}', '${s.action}', '${s.target || ''}')">
                     <div class="info">
                         <div class="ticker">${s.ticker}</div>
                         <div class="name">${s.name}</div>
-                        <div style="font-size: 0.55rem; color: var(--text-muted);">${s.desc || ''}</div>
                     </div>
                     <div class="source">${s.source}</div>
                 </div>
@@ -778,52 +738,17 @@
             renderWatchlistOptions(filter);
         }
         
-        function addToWatchlist(ticker, name, source, action, target, desc) {
-            watchlist.push({ ticker, name, source, action, target: target || null, desc: desc || '', addedAt: new Date().toISOString() });
+        function addToWatchlist(ticker, name, source, action, target) {
+            watchlist.push({ ticker, name, source, action, target: target || null, addedAt: new Date().toISOString() });
             localStorage.setItem('pisces_watchlist', JSON.stringify(watchlist));
             renderWatchlist();
-            closeWatchlistModal();
-        }
-        
-        function addCustomStock() {
-            const ticker = document.getElementById('customTicker').value.trim().toUpperCase();
-            const name = document.getElementById('customName').value.trim();
-            const desc = document.getElementById('customDesc').value.trim();
-            
-            if (!ticker || !name) {
-                alert('Fyll i både ticker och namn');
-                return;
-            }
-            
-            if (watchlist.find(w => w.ticker === ticker)) {
-                alert('Aktien finns redan i bevakningslistan');
-                return;
-            }
-            
-            watchlist.push({ 
-                ticker, 
-                name, 
-                source: 'Egen', 
-                action: 'watch', 
-                target: null, 
-                desc: desc || 'Egen bevakning',
-                addedAt: new Date().toISOString() 
-            });
-            localStorage.setItem('pisces_watchlist', JSON.stringify(watchlist));
-            renderWatchlist();
-            
-            // Clear inputs
-            document.getElementById('customTicker').value = '';
-            document.getElementById('customName').value = '';
-            document.getElementById('customDesc').value = '';
-            
             closeWatchlistModal();
         }
         
         function addToWatchlistQuick(ticker, name, source) {
             if (watchlist.find(w => w.ticker === ticker)) return;
-            const stock = recommendedStocks.find(s => s.ticker === ticker) || { action: 'watch', target: null, desc: '' };
-            watchlist.push({ ticker, name, source, action: stock.action, target: stock.target, desc: stock.desc || '', addedAt: new Date().toISOString() });
+            const stock = recommendedStocks.find(s => s.ticker === ticker) || { action: 'watch', target: null };
+            watchlist.push({ ticker, name, source, action: stock.action, target: stock.target, addedAt: new Date().toISOString() });
             localStorage.setItem('pisces_watchlist', JSON.stringify(watchlist));
             renderWatchlist();
         }
